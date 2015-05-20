@@ -78,7 +78,8 @@ class SelectelStorage(DjangoStorage):
         # if six.PY3:
         #     self.container.put_stream_py3(self._name(name), content)
         # else:
-        self.container.put_stream(self._name(name), content)
+        headers = dict(setting('SELECTEL_HEADERS', {}))
+        self.container.put_stream(self._name(name), content, headers=headers)
         return name
 
     def delete(self, name):
